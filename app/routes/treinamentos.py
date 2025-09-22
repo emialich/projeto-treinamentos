@@ -200,6 +200,7 @@ def atualizar_treinamento_agendado(turma_id):
     Atualiza uma TURMA existente (ex: para cancelar).
     """
     turma_para_atualizar = Turma.query.get(turma_id)
+
     if not turma_para_atualizar:
         return jsonify({"erro": "Turma não encontrada"}), 404
 
@@ -212,6 +213,8 @@ def atualizar_treinamento_agendado(turma_id):
     if 'data_inicio' in dados:
         turma_para_atualizar.data_inicio = datetime.fromisoformat(
             dados['data_inicio']).date()
+    if 'horario' in dados:
+        turma_para_atualizar.horario = dados['horario']
     if 'local' in dados:
         turma_para_atualizar.local = dados['local']
 
