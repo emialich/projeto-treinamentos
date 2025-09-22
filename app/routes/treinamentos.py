@@ -28,8 +28,6 @@ def obter_treinamentos():
 treinamentos_bp = Blueprint(
     'treinamentos', __name__, url_prefix='/treinamentos')
 
-# --- Rotas do CATÁLOGO de Treinamentos ---
-
 
 @treinamentos_bp.route('', methods=['GET'])
 def obter_treinamentos():
@@ -37,8 +35,6 @@ def obter_treinamentos():
     treinamentos = Treinamento.query.order_by(
         Treinamento.nome_treinamento).all()
     return jsonify([t.to_dict() for t in treinamentos])
-
-# --- NOVA ROTA: Listar por Instrutor ---
 
 
 @treinamentos_bp.route('/instrutor/<string:nome_instrutor>', methods=['GET'])

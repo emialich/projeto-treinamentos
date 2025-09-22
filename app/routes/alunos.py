@@ -9,27 +9,22 @@ alunos_bp = Blueprint('alunos_bp', __name__)
 @alunos_bp.route('/', methods=['GET'])
 def get_alunos():
     alunos = Aluno.query.all()
-    # Converte a lista de objetos para um formato JSON
     return jsonify([{'id': aluno.id, 'nome': aluno.nome, 'email': aluno.email} for aluno in alunos])
 
 
 @alunos_bp.route('/', methods=['POST'])
 def create_aluno():
-    # Aqui você pegaria os dados da requisição (request.json)
-    # Exemplo simplificado:
-    # Pega os dados JSON enviados na requisição
     dados = request.get_json()
 
     if not dados or not 'nome' in dados or not 'email' in dados:
         return jsonify({"erro": "Dados incompletos"}), 400
 
     treinamento_id = dados.get('treinamento_id')
-    # 3. Consulta o banco para ver se o treinamento existe
+    #  Consulta o banco para ver se o treinamento existe
     treinamento_existente = Treinamento.query.get(treinamento_id)
 
-    # 4. Se não existir, lança um erro
+    # Se não existir, lança um erro
     if not treinamento_existente:
-        # A mensagem de erro será capturada pelo 'try...except' na rota
         raise ValueError(
             f"O treinamento com ID {treinamento_id} não foi encontrado.")
 
