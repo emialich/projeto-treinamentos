@@ -3,7 +3,7 @@ from app.models.alunos import Aluno  # Importa o modelo
 from app.models.treinamentos import Treinamento  # Importa o modelo
 from app.database import db  # Importa a sessão do DB
 
-alunos_bp = Blueprint('alunos_bp', __name__)
+alunos_bp = Blueprint('alunos_bp', __name__, url_prefix='/agendamentos')
 
 
 @alunos_bp.route('/', methods=['GET'])
