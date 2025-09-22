@@ -1,0 +1,22 @@
+# Arquivos de Ambiente Virtual
+.venv/
+venv/
+*.pyc
+
+# Arquivos de Cache do Python
+__pycache__/
+
+# Arquivo de segredos e variáveis de ambiente
+# !! NUNCA ENVIE ESTE ARQUIVO PARA O GITHUB !!
+.env
+
+# Arquivos de banco de dados (se você usasse SQLite)
+*.db
+*.sqlite3
+instance/
+
+# Arquivos de Sistema Operacional e IDEs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

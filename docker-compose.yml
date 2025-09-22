@@ -1,0 +1,21 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: admin_treinamentos
+      POSTGRES_PASSWORD: senha_super_secreta
+      POSTGRES_DB: treinamentos_db
+    ports:
+      # Mapeia a porta 5432 do contêiner para a 5432 do seu computador
+      - "5432:5432"
+    volumes:
+      # Garante que os dados do banco persistam entre as sessões
+      - postgres_data:/var/lib/postgresql/data/
+
+volumes:
+  postgres_data:

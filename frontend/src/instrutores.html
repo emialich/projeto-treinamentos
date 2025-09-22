@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrutores - Gestão de Treinamentos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Train-Sys</a>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="instrutores.html" class="active">Instrutores</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="form-section">
+            <h2>Cadastrar Novo Instrutor</h2>
+            <form id="form-add-instructor">
+                <div class="form-group">
+                    <label for="instructor-name">Nome Completo</label>
+                    <input type="text" id="instructor-name" name="instructor-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="instructor-email">Email</label>
+                    <input type="email" id="instructor-email" name="instructor-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="instructor-specialties">Cursos Autorizados (separadas por vírgula)</label>
+                    <input type="text" id="instructor-specialties" name="instructor-specialties" placeholder="Ex: Architecting on AWS, Splunk Admin">
+                </div>
+
+                <button type="submit" class="btn">Cadastrar Instrutor</button>
+            </form>
+        </section>
+
+        <section class="table-section">
+            <h2>Instrutores Cadastrados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Especialidades</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <!-- Esta seção será populada dinamicamente via JavaScript -->
+                <tbody id="instructors-table-body">
+                    <!-- Linhas da tabela serão inseridas aqui -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

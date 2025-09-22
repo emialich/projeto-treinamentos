@@ -1,0 +1,193 @@
+<!-- Declara que este documento é HTML5 - deve ser sempre a primeira linha -->
+<!DOCTYPE html>
+
+<!-- Tag raiz do documento HTML, com atributo lang definindo o idioma como português brasileiro -->
+<html lang="pt-br">
+
+<!-- Seção HEAD - contém metadados que não aparecem na página, mas são importantes para o navegador -->
+<head>
+    <!-- Define a codificação de caracteres como UTF-8, permitindo acentos e caracteres especiais -->
+    <meta charset="UTF-8">
+    
+    <!-- Configura a viewport para responsividade em dispositivos móveis -->
+    <!-- width=device-width faz a largura se ajustar ao dispositivo -->
+    <!-- initial-scale=1.0 define o zoom inicial como 100% -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}
+
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    background-color: #555;
+}
+
+    </style>
+    <!-- Define o título que aparece na aba do navegador -->
+    <title>TREINAMENTOS</title>
+</head>
+
+<!-- Seção BODY - contém todo o conteúdo visível da página -->
+<body>
+        <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h2>Meu Site</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Título principal da página (heading nível 1) - o mais importante hierarquicamente -->
+    <!-- Identificadores são únicos, classes não, ambos são úteis para integração com css e javascript para referência-->
+    <h1 id="identificadorunico" class="valor classe">
+        Meu HTML
+    </h1>
+     <h1 id="id2" class="valor-classe">
+        <!--target blank abre numa nova aba-->
+        Meu <a href="www.google.com" target="_blank">HTML</a>
+    </h1>
+    
+    <!-- DIV: Container principal para seção de conteúdo -->
+    <div class="container">
+        <h2>Seção Principal</h2>
+        
+        <!-- Parágrafo de texto com diferentes tags de formatação inline incluindo SPAN -->
+        <p>
+            Lorem ipsum dolor sit amet, <strong>consectetur adipisicing elit</strong>. 
+            <b>Neque excepturi necessitatibus</b>, <em>id numquam quae commodi illo</em>. 
+            <i>Consequatur, excepturi rem recusandae</i> <u>hic modi natus commodi</u>, 
+            <del>velit amet voluptatem autem</del> <mark>molestiae veritatis</mark>? 
+            <small>Texto pequeno aqui</small>. A fórmula da água é H<sub>2</sub>O e 
+            Einstein descobriu E=mc<sup>2</sup>. 
+            <span class="destaque">Este texto está destacado usando span</span> e continua normalmente.
+            <img src="https://imgix.datadoghq.com//img/about/presskit/Bits_Mascot.jpg?dpr=2&auto=format&_gl=1*1kxpvci*_gcl_aw*R0NMLjE3NTQ0NDIxMzQuQ2owS0NRancxOGJFQmhDQkFSSXNBS3VBRkVZNG1rWGJmd1RLeUlQTjBmU3BGQVROSE5iNHBJaFR2NVEtZkhFY1BMc09PbTk3Nlo3QUFzWWFBa011RUFMd193Y0I.*_gcl_au*MTk4MDE1NzgxOC4xNzU0MDEzMTI3LjE3NzE5MDgzMy4xNzU0NDQyOTg3LjE3NTQ0NDMyNTM.*_ga*MjA4MTg4MDY0Ny4xNzU0MTY2MzU2*_ga_KN80RDFSQK*czE3NTc0NzQ4MDUkbzExJGcxJHQxNzU3NDc0ODI5JGozNiRsMCRoOTYwMTE4NTA.*_fplc*Tzl3aGhtOEszOVg5TUhpV3c1dTNjcSUyRm1tTm9nbkJNcVYlMkJ2c2h4bzJHSiUyQlVkRkNJWVNrTFFOZFEwVGx3bVZrMWN4ZXFXMzVZNnBpb1lsbEU2TGFPVXl1SXZKZ29DREVsS2hkSjh2eUlmNFBUMlVYZVE0Nm42UmdXekdTZ3FRJTNEJTNE" alt="bits datadog" width="100">
+        </p>
+
+        <!-- Parágrafo demonstrando múltiplos usos do SPAN -->
+        <p>
+            Este parágrafo mostra diferentes usos do <span class="texto-azul">span para texto azul</span>, 
+            <span class="texto-vermelho">span para texto vermelho maior</span>, e 
+            <span style="background-color: lightgreen; padding: 2px 4px; border-radius: 3px;">span com estilo inline</span>.
+            Também podemos usar para destacar <span class="destaque">palavras importantes</span> no meio do texto.
+        </p>
+    </div>
+
+    <!-- Linha horizontal para separar seções -->
+    <hr>
+
+    <!-- DIV: Barra lateral como exemplo de container maior -->
+    <div class="sidebar">
+        <h3>Barra Lateral</h3>
+        <p>Esta é uma <span style="font-weight: bold; color: #666;">div</span> que funciona como barra lateral.</p>
+        <ul>
+            <li>Item 1 da lista</li>
+            <li>Item 2 com <span class="destaque">destaque</span></li>
+            <li>Item 3 normal</li>
+        </ul>
+    </div>
+
+    <hr>
+    <!-- Exemplo de blockquote simples -->
+    <blockquote>
+        <p>A imaginação é mais importante que o conhecimento, pois o conhecimento é limitado, enquanto a imaginação abrange o mundo inteiro.</p>
+        <footer>— Albert Einstein</footer>
+    </blockquote>
+
+    <!-- Linha horizontal com estilo personalizado -->
+    <hr style="border: none; height: 3px; background-color: #007bff; border-radius: 2px;">
+
+    <!-- DIV: Seção de artigo -->
+    <div style="border: 1px solid #ddd; padding: 20px; margin: 15px 0; border-radius: 8px;">
+        <h3>Artigo de Exemplo</h3>
+        <p>
+            Este é um artigo contido em uma <span style="background-color: #ffeb3b; padding: 1px 3px;">div</span>. 
+            A div é um elemento de <span class="texto-azul">nível de bloco</span> que ocupa toda a largura disponível, 
+            enquanto o <span class="texto-vermelho">span é um elemento inline</span> que se ajusta ao conteúdo.
+        </p>
+        
+        <!-- Sub-seção dentro da div -->
+        <div style="background-color: #f5f5f5; padding: 10px; margin-top: 10px; border-left: 4px solid #2196f3;">
+            <h4>Sub-seção</h4>
+            <p>
+                Esta é uma div aninhada dentro de outra div. 
+                Podemos usar <span style="text-decoration: underline;">spans</span> aqui também para 
+                <span style="font-style: italic; color: #666;">estilizar partes específicas</span> do texto.
+            </p>
+        </div>
+    </div>
+
+    <!-- Blockquote com atributo cite para referência da fonte -->
+    <blockquote cite="https://www.brainyquote.com/quotes/steve_jobs_416859">
+        <p>A inovação distingue um líder de um seguidor.</p>
+        <footer>— <cite>Steve Jobs</cite></footer>
+    </blockquote>
+
+    <!-- Linha horizontal pontilhada -->
+    <hr style="border-top: 2px dotted #333; border-bottom: none; border-left: none; border-right: none;">
+
+    <!-- DIV: Exemplo de layout com múltiplas divs -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <div style="flex: 1; background-color: #e3f2fd; padding: 15px; min-width: 200px;">
+            <h4>Coluna 1</h4>
+            <p>Conteúdo da primeira coluna com <span class="destaque">texto destacado</span>.</p>
+        </div>
+        
+        <div style="flex: 1; background-color: #f3e5f5; padding: 15px; min-width: 200px;">
+            <h4>Coluna 2</h4>
+            <p>Conteúdo da segunda coluna com <span style="color: purple; font-weight: bold;">span colorido</span>.</p>
+        </div>
+    </div>
+
+    <!-- Parágrafo final demonstrando todas as tags -->
+    <p>
+        Este parágrafo final demonstra o uso de diferentes tags: 
+        <strong>texto importante</strong>, 
+        <b>texto em negrito</b>, 
+        <em>texto com ênfase</em>, 
+        <i>texto em itálico</i>, 
+        <u>texto sublinhado</u>, 
+        <del>texto riscado</del>, 
+        <mark>texto destacado</mark>, 
+        <small>texto pequeno</small>,
+        texto<sub>subscrito</sub>, texto<sup>sobrescrito</sup>, e 
+        <span style="border: 1px solid #333; padding: 2px 5px; background-color: #fff3cd;">span com borda</span>.
+    </p>
+
+</body>
+
+<!-- Fecha a tag html iniciada no começo do documento -->
+</html>

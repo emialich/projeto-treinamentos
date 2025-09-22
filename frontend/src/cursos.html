@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos - Gestão de Treinamentos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Train-Sys</a>
+            <ul>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="cursos.html" class="active">Cursos</a></li>
+                <li><a href="instrutores.html">Instrutores</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="form-section">
+            <h2>Cadastrar Novo Treinamento</h2>
+            <form id="form-add-course">
+                <div class="form-group">
+                    <label for="course-name">Nome do Curso</label>
+                    <input type="text" id="course-name" name="course-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="course-description">Descrição</label>
+                    <textarea id="course-description" name="course-description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="course-load">Carga Horária (horas)</label>
+                    <input type="number" id="course-load" name="course-load" required>
+                </div>
+                <div class="form-group">
+                    <label for="course-instructor">Instrutor Responsável</label>
+                    <input type="text" id="course-instructor" name="course-instructor">
+                </div>
+                <button type="submit" class="btn">Cadastrar Curso</button>
+            </form>
+        </section>
+
+        <section class="table-section">
+            <h2>Cursos Cadastrados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome do Curso</th>
+                        <th>Carga Horária</th>
+                        <th>Instrutor</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <!-- Esta seção será populada dinamicamente via JavaScript -->
+                <tbody id="courses-table-body">
+                    <!-- Linhas da tabela serão inseridas aqui -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
