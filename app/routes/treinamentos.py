@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from datetime import datetime
-from app import db  # Importa a instância central do SQLAlchemy
+from app import db
+from sqlalchemy import extract
 
 # Importa os modelos necessários
 from app.models.treinamentos import Treinamento
@@ -150,11 +151,70 @@ def obter_treinamentos_por_vendor(vendor):
 def obter_treinamentos_agendados():
     """
     Obtém todas as TURMAS com data de início futura.
+    Aplica filtros opcionais por 'mes' e/ou 'ano' se forem fornecidos na URL.
+    Exemplos:
+    - /agendados (retorna todas as turmas futuras)
+    - /agendados?mes=11 (retorna turmas futuras de Novembro de qualquer ano)
+    - /agendados?mes=11&ano=2025 (retorna turmas futuras de Novembro de 2025)
     """
+
+    # 1. Obter os parâmetros opcionais da URL
+    mes_filtro = request.args.get('mes', type=int)
+    ano_filtro = request.args.get('ano', type=int)
     hoje = datetime.today().date()
-    turmas_agendadas = Turma.query.filter(
-        Turma.data_inicio >= hoje).order_by(Turma.data_inicio).all()
-    return jsonify([turma.to_dict() for turma in turmas_agendadas])
+
+    try:
+        # 2. Inicia a query base: sempre filtra por turmas com data futura
+        query = Turma.query.filter(Turma.data_inicio >= hoje)
+
+        # 3. Adiciona o filtro de MÊS, se ele foi fornecido
+        if mes_filtro:
+            # Validação para garantir que o mês é um valor válido
+            if not 1 <= mes_filtro <= 12:
+                return jsonify({"erro": "O valor para 'mes' deve ser entre 1 e 12."}), 400
+            # Adiciona o filtro de mês à query existente
+            query = query.filter(
+                extract('month', Turma.data_inicio) == mes_filtro)
+
+        # 4. Adiciona o filtro de ANO, se ele foi fornecido
+        if ano_filtro:
+            # Adiciona o filtro de ano à query existente
+            query = query.filter(
+                extract('year', Turma.data_inicio) == ano_filtro)
+
+        # 5. Executa a query final (com ou sem os filtros opcionais) e ordena o resultado
+        turmas_agendadas = query.order_by(Turma.data_inicio).all()
+
+        # 6. Retorna a lista de turmas encontradas
+        return jsonify([turma.to_dict() for turma in turmas_agendadas])
+
+    except Exception as e:
+        return jsonify({"erro": f"Ocorreu um erro ao processar a requisição: {str(e)}"}), 500
+
+
+'''
+@alunos_bp.route('/', methods=['GET'])
+def get_alunos():
+    """
+    Obtém todos os alunos ou filtra os alunos por turma_id.
+    O filtro é passado como um argumento na URL, ex: /alunos?turma_id=1
+    """
+    # 1. Tenta obter o 'turma_id' dos argumentos da URL
+    turma_id_filtro = request.args.get('turma_id', type=int)
+
+    # 2. Se um turma_id foi fornecido na URL, filtra por ele
+    if turma_id_filtro:
+        alunos = Aluno.query.filter_by(turma_id=turma_id_filtro).all()
+        # Se nenhum aluno for encontrado para essa turma, você pode querer retornar uma lista vazia ou uma mensagem
+        if not alunos:
+            return jsonify({"mensagem": f"Nenhum aluno encontrado para a turma de ID {turma_id_filtro}"}), 404
+
+    # 3. Se nenhum turma_id foi fornecido, retorna todos os alunos
+    else:
+        alunos = Aluno.query.all()
+
+    # 4. Retorna a lista de alunos (filtrada ou não)
+'''
 
 
 @treinamentos_bp.route('/agendados', methods=['POST'])
