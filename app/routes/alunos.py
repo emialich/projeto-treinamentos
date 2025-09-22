@@ -1,12 +1,9 @@
 from flask import Blueprint, jsonify, request
-from app.models.alunos import Aluno  # Importa o modelo Aluno
-from app.models.turmas import Turma    # <<-- MUDANÇA: Importa o modelo Turma
-from app.database import db          # Importa a sessão do DB
+from app.models.alunos import Aluno
+from app.models.turmas import Turma
+from app.database import db
 
-# O prefixo da URL faz mais sentido ser /alunos, mas vou manter o seu para consistência
-# Se quiser, pode mudar para:
 alunos_bp = Blueprint('alunos_bp', __name__, url_prefix='/alunos')
-# alunos_bp = Blueprint('alunos_bp', __name__, url_prefix='/agendamentos')
 
 
 @alunos_bp.route('/', methods=['GET'])
