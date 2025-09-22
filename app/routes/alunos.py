@@ -12,25 +12,44 @@ alunos_bp = Blueprint('alunos_bp', __name__, url_prefix='/alunos')
 @alunos_bp.route('/', methods=['GET'])
 def get_alunos():
     """
-    Obtém todos os alunos ou filtra os alunos por turma_id.
-    O filtro é passado como um argumento na URL, ex: /alunos?turma_id=1
+    Obtém todos os alunos ou, se um 'turma_id' for fornecido, filtra por essa
+    turma e enriquece a resposta com o nome do treinamento e do instrutor.
     """
     # 1. Tenta obter o 'turma_id' dos argumentos da URL
     turma_id_filtro = request.args.get('turma_id', type=int)
 
-    # 2. Se um turma_id foi fornecido na URL, filtra por ele
+    # --- CASO 1: A ROTA É FILTRADA POR TURMA ---
     if turma_id_filtro:
-        alunos = Aluno.query.filter_by(turma_id=turma_id_filtro).all()
-        # Se nenhum aluno for encontrado para essa turma, você pode querer retornar uma lista vazia ou uma mensagem
-        if not alunos:
-            return jsonify({"mensagem": f"Nenhum aluno encontrado para a turma de ID {turma_id_filtro}"}), 404
+        # Busca o objeto Turma completo pelo ID fornecido.
+        # Esta é a abordagem mais eficiente.
+        turma = Turma.query.get(turma_id_filtro)
 
-    # 3. Se nenhum turma_id foi fornecido, retorna todos os alunos
+        # Se a turma com o ID especificado não for encontrada, retorna um erro 404.
+        if not turma:
+            return jsonify({"erro": f"A turma com ID {turma_id_filtro} não foi encontrada."}), 404
+
+        # Acessa os dados relacionados através das relações do SQLAlchemy
+        # Isso só é possível se os 'relationships' estiverem definidos nos seus modelos.
+        nome_treinamento = turma.treinamento.nome_treinamento if turma.treinamento else "N/A"
+        instrutor_sugerido = turma.treinamento.instrutor_sugerido if turma.treinamento else "N/A"
+
+        # Pega a lista de alunos diretamente do objeto turma
+        alunos_da_turma = [aluno.to_dict() for aluno in turma.alunos]
+
+        # Monta o objeto de resposta JSON com a estrutura especial
+        resposta_filtrada = {
+            "nome_treinamento": nome_treinamento,
+            "instrutor_sugerido": instrutor_sugerido,
+            "alunos": alunos_da_turma
+        }
+
+        return jsonify(resposta_filtrada)
+
+    # --- CASO 2: A ROTA NÃO É FILTRADA ---
     else:
+        # Se nenhum filtro foi passado, retorna a lista simples de todos os alunos.
         alunos = Aluno.query.all()
-
-    # 4. Retorna a lista de alunos (filtrada ou não)
-    return jsonify([aluno.to_dict() for aluno in alunos])
+        return jsonify([aluno.to_dict() for aluno in alunos])
 
 
 @alunos_bp.route('/', methods=['POST'])
